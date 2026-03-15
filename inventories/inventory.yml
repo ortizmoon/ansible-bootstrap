@@ -1,0 +1,10 @@
+all:
+  children:
+    docker_hosts:
+      hosts:
+        192.168.10.2:
+          ansible_user: root
+    linux_hosts:
+      hosts:
+        192.168.10.2:
+          ansible_user: root

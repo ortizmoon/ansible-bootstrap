@@ -1,0 +1,12 @@
+*.retry
+ansible.log
+.ansible/
+
+inventories/group_vars/*/creds.yml
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store

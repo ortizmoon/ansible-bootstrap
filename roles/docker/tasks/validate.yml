@@ -1,0 +1,13 @@
+---
+- name: Validate supported platform and role variables
+  ansible.builtin.assert:
+    that:
+      - ansible_os_family in docker_supported_os_families
+      - ansible_service_mgr == 'systemd'
+      - ansible_distribution in docker_supported_debian_distributions
+      - docker_repo_channel in docker_supported_repo_channels
+      - docker_manage_daemon_config is boolean
+      - docker_remove_conflicting_packages is boolean
+      - not docker_manage_daemon_config or (docker_daemon_config is defined and docker_daemon_config is mapping)
+    fail_msg: >-
+      Check role and vars

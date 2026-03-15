@@ -1,0 +1,11 @@
+---
+docker_repo_channel: stable
+docker_manage_daemon_config: true
+docker_remove_conflicting_packages: true
+
+docker_daemon_config:
+  live-restore: true
+  log-driver: json-file
+  log-opts:
+    max-size: "10m"
+    max-file: "3"

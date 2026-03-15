@@ -1,0 +1,19 @@
+---
+docker_supported_os_families:
+  - Debian
+
+docker_supported_debian_distributions:
+  - Debian
+  - Ubuntu
+
+docker_supported_repo_channels:
+  - stable
+  - test
+  - nightly
+
+docker_apt_arch_map:
+  x86_64: amd64
+  aarch64: arm64
+  armv7l: armhf
+  ppc64le: ppc64el
+  s390x: s390x
