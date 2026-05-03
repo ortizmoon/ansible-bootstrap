@@ -1,0 +1,4 @@
+---
+gitlab_runner_apt_repo: "https://packages.gitlab.com/runner/gitlab-runner/debian/"
+gitlab_runner_apt_keyserver: "https://packages.gitlab.com/runner/gitlab-runner/gpgkey"
+gitlab_runner_config: /etc/gitlab-runner/config.toml

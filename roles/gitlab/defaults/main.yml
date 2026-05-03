@@ -1,0 +1,10 @@
+---
+gitlab_data_mount: /var/opt/gitlab
+
+gitlab_smtp_enable: false
+gitlab_smtp_address: ""
+gitlab_smtp_port: 587
+gitlab_smtp_user_name: ""
+gitlab_smtp_password: ""
+gitlab_smtp_domain: ""
+gitlab_email_from: ""

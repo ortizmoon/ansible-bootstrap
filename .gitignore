@@ -2,7 +2,7 @@
 ansible.log
 .ansible/
 
-inventories/group_vars/*/creds.yml
+inventories/group_vars/*/vault.yml
 
 .vscode/
 .idea/

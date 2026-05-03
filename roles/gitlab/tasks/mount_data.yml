@@ -1,0 +1,26 @@
+---
+- name: Create partition on data disk
+  community.general.parted:
+    device: "{{ gitlab_data_device }}"
+    number: 1
+    state: present
+    fs_type: ext4
+
+- name: Create ext4 filesystem
+  community.general.filesystem:
+    dev: "{{ gitlab_data_device }}1"
+    fstype: ext4
+
+- name: Create mount point
+  ansible.builtin.file:
+    path: "{{ gitlab_data_mount }}"
+    state: directory
+    mode: "0755"
+
+- name: Mount data disk and add in fstab
+  ansible.builtin.mount:
+    path: "{{ gitlab_data_mount }}"
+    src: "{{ gitlab_data_device }}1"
+    fstype: ext4
+    opts: defaults
+    state: mounted

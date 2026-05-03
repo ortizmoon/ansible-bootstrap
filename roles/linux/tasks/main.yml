@@ -1,8 +1,6 @@
 ---
 - name: Set timezone
   ansible.builtin.include_tasks: set_timezone.yml
-  when: linux_set_timezone | default(false) | bool
 
 - name: Install packages
   ansible.builtin.include_tasks: install_packages.yml
-  when: linux_install_packages | default(false) | bool

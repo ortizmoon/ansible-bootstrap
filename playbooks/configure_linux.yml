@@ -5,6 +5,3 @@
   gather_facts: true
   roles:
     - role: linux
-      vars:
-        linux_set_timezone: true
-        linux_install_packages: true

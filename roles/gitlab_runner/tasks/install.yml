@@ -1,0 +1,12 @@
+---
+- name: Install gitlab-runner
+  ansible.builtin.apt:
+    name: "gitlab-runner={{ gitlab_runner_version }}"
+    state: present
+    update_cache: true
+
+- name: Start gitlab-runner service
+  ansible.builtin.systemd:
+    name: gitlab-runner
+    enabled: true
+    state: started

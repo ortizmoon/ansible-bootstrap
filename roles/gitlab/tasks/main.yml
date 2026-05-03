@@ -1,0 +1,13 @@
+---
+- name: Mount data disk
+  ansible.builtin.include_tasks: mount_data.yml
+  when: gitlab_data_device is defined
+
+- name: Add gitlab apt repository
+  ansible.builtin.include_tasks: add_repo.yml
+
+- name: Install gitlab
+  ansible.builtin.include_tasks: install.yml
+
+- name: Configure gitlab
+  ansible.builtin.include_tasks: configure.yml

@@ -1,10 +1,75 @@
+---
 all:
   children:
-    docker_hosts:
-      hosts:
-        192.168.10.2:
-          ansible_user: root
     linux_hosts:
       hosts:
-        192.168.10.2:
+        traefik:
+        storage:
+        smarthome:
+        gitlab:
+        runner:
+        media:
+
+    docker_hosts:
+      hosts:
+        traefik:
+        gitlab:
+        runner:
+        media:
+
+    proxy:
+      hosts:
+        traefik:
+          ansible_host: 192.168.10.253
           ansible_user: root
+
+    smarthome:
+      hosts:
+        smarthome:
+          ansible_host: 192.168.10.3
+          ansible_user: root
+
+    gitlab_servers:
+      hosts:
+        gitlab:
+          ansible_host: 192.168.10.6
+          ansible_user: root
+
+    gitlab_runners:
+      hosts:
+        runner:
+          ansible_host: 192.168.10.5
+          ansible_user: root
+
+    media:
+      hosts:
+        media:
+          ansible_host: 192.168.10.11
+          ansible_user: root
+
+    # kube_masters:
+    #   hosts:
+    #     kube_master_01:
+    #       ansible_host: 192.168.10.20
+    #       ansible_user: root
+    #     kube_master_02:
+    #       ansible_host: 192.168.10.21
+    #       ansible_user: root
+
+    # kube_workers:
+    #   hosts:
+    #     kube_worker_01:
+    #       ansible_host: 192.168.10.30
+    #       ansible_user: root
+    #     kube_worker_02:
+    #       ansible_host: 192.168.10.31
+    #       ansible_user: root
+    #     kube_worker_03:
+    #       ansible_host: 192.168.10.32
+    #       ansible_user: root
+    #     kube_worker_04:
+    #       ansible_host: 192.168.10.33
+    #       ansible_user: root
+    #     kube_worker_05:
+    #       ansible_host: 192.168.10.34
+    #       ansible_user: root

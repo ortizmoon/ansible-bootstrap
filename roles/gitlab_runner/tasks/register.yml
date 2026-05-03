@@ -1,0 +1,42 @@
+---
+- name: Create runner in gitlab and obtain authentication token
+  community.general.gitlab_runner:
+    api_url: "{{ gitlab_runner_gitlab_url }}"
+    api_token: "{{ gitlab_runner_api_token }}"
+    description: "{{ gitlab_runner_name }}"
+    state: present
+    active: true
+    run_untagged: "{{ gitlab_runner_run_untagged }}"
+    tag_list: "{{ gitlab_runner_tags }}"
+    locked: false
+  delegate_to: localhost
+  become: false
+  register: gitlab_runner_result
+  no_log: true
+
+- name: Check registered runners on this host
+  ansible.builtin.command: gitlab-runner list
+  register: runner_list
+  changed_when: false
+
+- name: Register runner daemon on this host
+  ansible.builtin.command:
+    cmd: >
+      gitlab-runner register
+      --non-interactive
+      --url "{{ gitlab_runner_gitlab_url }}"
+      --token "{{ gitlab_runner_result.runner.token }}"
+      --name "{{ gitlab_runner_name }}"
+      --executor "{{ gitlab_runner_executor }}"
+      --docker-image "{{ gitlab_runner_docker_image }}"
+  when: gitlab_runner_name not in runner_list.stdout
+  changed_when: gitlab_runner_name not in runner_list.stdout
+  no_log: true
+  notify: Restart gitlab-runner
+
+- name: Set concurrent jobs in config.toml
+  ansible.builtin.lineinfile:
+    path: "{{ gitlab_runner_config }}"
+    regexp: '^concurrent\s*='
+    line: "concurrent = {{ gitlab_runner_concurrent }}"
+  notify: Restart gitlab-runner

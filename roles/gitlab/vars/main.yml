@@ -1,0 +1,3 @@
+---
+gitlab_apt_repo: "https://packages.gitlab.com/gitlab/{{ gitlab_edition }}/debian/"
+gitlab_apt_keyserver: "https://packages.gitlab.com/gitlab/{{ gitlab_edition }}/gpgkey"

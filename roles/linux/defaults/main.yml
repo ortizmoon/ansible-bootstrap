@@ -3,3 +3,9 @@ linux_timezone: Asia/Barnaul
 
 linux_packages:
   - mc
+  - ca-certificates
+  - curl
+  - gnupg
+  - tzdata
+  - perl
+  - parted

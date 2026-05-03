@@ -1,0 +1,9 @@
+---
+- name: Add gitlab-runner apt repository
+  ansible.builtin.include_tasks: add_repo.yml
+
+- name: Install gitlab-runner
+  ansible.builtin.include_tasks: install.yml
+
+- name: Register gitlab-runner
+  ansible.builtin.include_tasks: register.yml

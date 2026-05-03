@@ -1,0 +1,32 @@
+## gitlab configuration — managed by Ansible, do not edit manually
+
+external_url 'https://{{ gitlab_domain }}'
+
+# Nginx: listen on internal port, Traefik handles TLS termination
+nginx['listen_port'] = {{ gitlab_port }}
+nginx['listen_https'] = false
+
+# Let's Encrypt is handled by Traefik
+letsencrypt['enable'] = false
+
+# Disable redirect to https since Traefik already does it
+nginx['redirect_http_to_https'] = false
+
+# Tell gitlab that the real client connection is HTTPS (Traefik sends X-Forwarded-Proto)
+nginx['proxy_set_headers'] = {
+  "X-Forwarded-Proto" => "https",
+  "X-Forwarded-Ssl" => "on"
+}
+
+{% if gitlab_smtp_enable %}
+# SMTP
+gitlab_rails['smtp_enable'] = true
+gitlab_rails['smtp_address'] = '{{ gitlab_smtp_address }}'
+gitlab_rails['smtp_port'] = {{ gitlab_smtp_port }}
+gitlab_rails['smtp_user_name'] = '{{ gitlab_smtp_user_name }}'
+gitlab_rails['smtp_password'] = '{{ gitlab_smtp_password }}'
+gitlab_rails['smtp_domain'] = '{{ gitlab_smtp_domain }}'
+gitlab_rails['smtp_authentication'] = 'login'
+gitlab_rails['smtp_enable_starttls_auto'] = true
+gitlab_rails['gitlab_email_from'] = '{{ gitlab_email_from }}'
+{% endif %}

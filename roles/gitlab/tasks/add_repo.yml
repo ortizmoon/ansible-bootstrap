@@ -1,0 +1,18 @@
+---
+- name: Download gpg key
+  ansible.builtin.get_url:
+    url: "{{ gitlab_apt_keyserver }}"
+    dest: /tmp/gitlab.gpg.asc
+    mode: "0644"
+
+- name: Dearmor gpg key
+  ansible.builtin.command:
+    cmd: gpg --dearmor -o /usr/share/keyrings/gitlab.gpg /tmp/gitlab.gpg.asc
+    creates: /usr/share/keyrings/gitlab.gpg
+
+- name: Add gitlab repo
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/gitlab.gpg] {{ gitlab_apt_repo }} {{ ansible_distribution_release }} main"
+    filename: gitlab
+    state: present
+    update_cache: true
