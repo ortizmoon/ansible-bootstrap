@@ -1,18 +1,11 @@
-## gitlab configuration — managed by Ansible, do not edit manually
-
 external_url 'https://{{ gitlab_domain }}'
 
-# Nginx: listen on internal port, Traefik handles TLS termination
 nginx['listen_port'] = {{ gitlab_port }}
 nginx['listen_https'] = false
 
-# Let's Encrypt is handled by Traefik
 letsencrypt['enable'] = false
 
-# Disable redirect to https since Traefik already does it
 nginx['redirect_http_to_https'] = false
-
-# Tell gitlab that the real client connection is HTTPS (Traefik sends X-Forwarded-Proto)
 nginx['proxy_set_headers'] = {
   "X-Forwarded-Proto" => "https",
   "X-Forwarded-Ssl" => "on"

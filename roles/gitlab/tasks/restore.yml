@@ -1,0 +1,7 @@
+---
+- name: Deploy restore script
+  ansible.builtin.template:
+    src: gitlab-restore-r2.sh.j2
+    dest: /usr/local/bin/gitlab-restore-r2.sh
+    mode: "0700"
+  no_log: true

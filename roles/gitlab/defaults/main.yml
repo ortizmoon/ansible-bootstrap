@@ -1,6 +1,10 @@
 ---
 gitlab_data_mount: /var/opt/gitlab
 
+gitlab_backup_script_path: /usr/local/bin/gitlab-backup-r2.sh
+gitlab_backup_schedule: "*-*-* 03:00:00"
+gitlab_backup_keep_days: 7
+
 gitlab_smtp_enable: false
 gitlab_smtp_address: ""
 gitlab_smtp_port: 587

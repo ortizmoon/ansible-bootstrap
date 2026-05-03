@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+
+gitlab-backup create SKIP=registry
+
+rclone copy /var/opt/gitlab/backups/ r2:{{ r2_bucket }}/{{ r2_backup_path }}/
+rclone copy /etc/gitlab/ r2:{{ r2_bucket }}/{{ r2_backup_path }}/config/
+
+find /var/opt/gitlab/backups/ -name "*.tar" -mtime +{{ gitlab_backup_keep_days }} -delete

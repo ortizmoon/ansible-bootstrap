@@ -1,0 +1,22 @@
+#!/bin/bash
+set -euo pipefail
+
+LATEST=$(rclone ls r2:{{ r2_bucket }}/{{ r2_backup_path }}/ --include "*.tar" | sort | tail -1 | awk '{print $2}')
+
+if [ -z "${LATEST}" ]; then
+  echo "No backups found in R2"
+  exit 1
+fi
+
+echo "Restoring: ${LATEST}"
+
+rclone copy r2:{{ r2_bucket }}/{{ r2_backup_path }}/${LATEST} /var/opt/gitlab/backups/
+rclone copy r2:{{ r2_bucket }}/{{ r2_backup_path }}/config/ /etc/gitlab/
+
+chmod 600 /var/opt/gitlab/backups/${LATEST}
+
+gitlab-ctl stop puma
+gitlab-ctl stop sidekiq
+gitlab-backup restore BACKUP=${LATEST%_gitlab_backup.tar} force=yes
+gitlab-ctl reconfigure
+gitlab-ctl restart

@@ -1,0 +1,12 @@
+---
+gitlab_version: "17.11.1-ce.0"
+gitlab_edition: gitlab-ce
+gitlab_domain: "gitlab.ebatra.com"
+gitlab_port: 8181
+gitlab_data_device: /dev/sdb
+
+r2_access_key: "{{ vault_r2_access_key }}"
+r2_secret_key: "{{ vault_r2_secret_key }}"
+r2_endpoint: "https://c425f44485956f1959d676ea1a203044.r2.cloudflarestorage.com"
+r2_bucket: "bootstrap-backups"
+r2_backup_path: "gitlab"
