@@ -1,0 +1,14 @@
+services:
+
+  traefik:
+    image: {{ traefik_image }}
+    container_name: traefik
+    restart: unless-stopped
+    environment:
+      - CF_DNS_API_TOKEN={{ cf_dns_api_token }}
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./dynamic.yml:/etc/traefik/dynamic.yml:ro
+      - ./acme.json:/acme.json
+    network_mode: host
+

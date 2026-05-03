@@ -1,7 +1,7 @@
 ---
 gitlab_version: "17.11.1-ce.0"
 gitlab_edition: gitlab-ce
-gitlab_domain: "gitlab.ebatra.com"
+gitlab_domain: "gitlab.{{ base_domain }}"
 gitlab_port: 8181
 gitlab_data_device: /dev/sdb
 

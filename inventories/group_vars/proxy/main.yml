@@ -1,0 +1,4 @@
+---
+traefik_acme_email: "{{ vault_traefik_acme_email }}"
+cf_dns_api_token: "{{ vault_cf_dns_api_token }}"
+cf_tunnel_token: "{{ vault_cf_tunnel_token }}"

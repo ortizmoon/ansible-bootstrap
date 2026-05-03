@@ -1,6 +1,6 @@
 ---
-gitlab_runner_gitlab_url: "https://gitlab.ebatra.com"
-gitlab_runner_version: "18.11.1-1"
+gitlab_runner_gitlab_url: "https://gitlab.{{ base_domain }}"
+gitlab_runner_version: "18.11.2-1"
 gitlab_runner_tags:
   - linux
 gitlab_runner_run_untagged: false

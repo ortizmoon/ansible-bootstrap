@@ -1,0 +1,8 @@
+---
+- name: Deploy Traefik
+  hosts: proxy
+  become: true
+  roles:
+    - role: linux
+    - role: docker
+    - role: traefik

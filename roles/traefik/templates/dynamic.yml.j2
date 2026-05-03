@@ -1,0 +1,66 @@
+http:
+
+  routers:
+
+    traefik:
+      rule: "Host(`traefik.{{ base_domain }}`)"
+      entryPoints:
+        - websecure
+      service: api@internal
+      tls:
+        certResolver: cloudflare
+
+    gitlab:
+      rule: "Host(`gitlab.{{ base_domain }}`)"
+      entryPoints:
+        - websecure
+      service: gitlab
+      tls:
+        certResolver: cloudflare
+
+    media:
+      rule: "Host(`media.{{ base_domain }}`)"
+      entryPoints:
+        - websecure
+      service: media
+      tls:
+        certResolver: cloudflare
+
+    torrent:
+      rule: "Host(`torrent.{{ base_domain }}`)"
+      entryPoints:
+        - websecure
+      service: torrent
+      tls:
+        certResolver: cloudflare
+
+    homeassistant:
+      rule: "Host(`home.{{ base_domain }}`)"
+      entryPoints:
+        - websecure
+      service: homeassistant
+      tls:
+        certResolver: cloudflare
+
+
+  services:
+
+    gitlab:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.6:8181"
+
+    media:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.11:8096"
+
+    torrent:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.11:8080"
+
+    homeassistant:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.224:8123"
