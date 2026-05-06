@@ -2,6 +2,6 @@
   hosts: gitlab_runners
   become: true
   roles:
-    - role: linux
+    - role: common
     - role: docker
     - role: gitlab_runner

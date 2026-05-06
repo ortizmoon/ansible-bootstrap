@@ -9,3 +9,5 @@ linux_packages:
   - tzdata
   - perl
   - parted
+  - unzip
+  - libcap2-bin

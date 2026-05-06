@@ -1,7 +1,7 @@
 ---
-- name: Deploy Vault
+- name: Deploy vault
   hosts: vault
   become: true
   roles:
-    - role: linux
+    - role: common
     - role: vault

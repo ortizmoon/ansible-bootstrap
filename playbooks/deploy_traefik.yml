@@ -3,6 +3,6 @@
   hosts: proxy
   become: true
   roles:
-    - role: linux
+    - role: common
     - role: docker
     - role: traefik

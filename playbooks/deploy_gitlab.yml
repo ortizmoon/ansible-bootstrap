@@ -2,6 +2,6 @@
   hosts: gitlab_servers
   become: true
   roles:
-    - role: linux
+    - role: common
     - role: gitlab
 

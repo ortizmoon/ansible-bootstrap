@@ -5,5 +5,5 @@ vault_data_dir: /opt/vault/data
 vault_config_dir: /etc/vault.d
 vault_user: vault
 vault_group: vault
-vault_port: 8080
-vault_cluster_port: 8081
+vault_port: 8200
+vault_cluster_port: 8201
