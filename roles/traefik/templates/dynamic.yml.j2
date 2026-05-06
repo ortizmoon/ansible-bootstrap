@@ -26,6 +26,14 @@ http:
       tls:
         certResolver: cloudflare
 
+    vault:
+      rule: "Host(`vault.{{ base_domain }}`)"
+      entryPoints:
+        - websecure
+      service: media
+      tls:
+        certResolver: cloudflare
+
     torrent:
       rule: "Host(`torrent.{{ base_domain }}`)"
       entryPoints:
@@ -54,6 +62,11 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.10.11:8096"
+
+    vault:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.200:8080"
 
     torrent:
       loadBalancer:

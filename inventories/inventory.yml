@@ -26,6 +26,12 @@ all:
           ansible_host: 192.168.10.6
           ansible_user: root
 
+    vault_servers:
+      hosts:
+        vault:
+          ansible_host: 192.168.10.200
+          ansible_user: root
+
     gitlab_runners:
       hosts:
         runner:
