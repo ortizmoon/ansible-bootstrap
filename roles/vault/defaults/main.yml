@@ -7,3 +7,7 @@ vault_user: vault
 vault_group: vault
 vault_port: 8200
 vault_cluster_port: 8201
+
+vault_backup_script_path: /usr/local/bin/vault-backup-r2.sh
+vault_backup_schedule: "*-*-* 04:00:00"
+vault_backup_keep_days: 7

@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euo pipefail
+
+SNAPSHOT_PATH="/tmp/vault-snapshot-$(date +%Y%m%d%H%M%S).snap"
+
+VAULT_ADDR=http://127.0.0.1:{{ vault_port }} VAULT_TOKEN={{ vault_backup_token }} vault operator raft snapshot save "$SNAPSHOT_PATH"
+
+rclone copy "$SNAPSHOT_PATH" r2:{{ r2_bucket }}/{{ r2_backup_path }}/
+
+rm -f "$SNAPSHOT_PATH"
+
+find /tmp -name "vault-snapshot-*.snap" -mtime +{{ vault_backup_keep_days }} -delete

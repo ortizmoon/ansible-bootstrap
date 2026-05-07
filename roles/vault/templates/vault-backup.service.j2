@@ -1,0 +1,16 @@
+[Unit]
+Description=Vault backup to R2
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+Environment=HOME=/root
+ExecStart={{ vault_backup_script_path }}
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=vault-backup
+TimeoutStartSec=600
+User=root
+PrivateTmp=yes
+NoNewPrivileges=yes
